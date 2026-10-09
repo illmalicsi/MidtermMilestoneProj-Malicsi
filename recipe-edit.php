@@ -129,10 +129,25 @@ require_once 'includes/header.php';
       </div>
 
       <!-- Ingredient inputs -->
+      <?php
+        $displayIngredients = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ingredients'])) {
+            foreach ($_POST['ingredients'] as $raw) {
+                $displayIngredients[] = trim($raw);
+            }
+        } else {
+            foreach ($ingredients as $ing) {
+                $displayIngredients[] = $ing['name'];
+            }
+        }
+        if (empty($displayIngredients)) {
+            $displayIngredients = [''];
+        }
+      ?>
       <div id="ingredients-container">
-        <?php foreach ($ingredients as $ing): ?>
+        <?php foreach ($displayIngredients as $index => $ingName): ?>
           <div class="ingredient-row">
-            <input type="text" name="ingredients[]" class="form-control" value="<?php echo e($ing['name']); ?>" required>
+            <input type="text" name="ingredients[]" class="form-control" placeholder="e.g., 500g Pork belly, sliced" value="<?php echo e($ingName); ?>" <?php echo $index === 0 ? 'required' : ''; ?>>
             <button type="button" class="btn-remove-row" title="Remove ingredient" aria-label="Remove">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>

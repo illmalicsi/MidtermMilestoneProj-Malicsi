@@ -28,6 +28,11 @@ if ($recipeId <= 0) {
 $favoriteModel = new Favorite($pdo);
 $isFavorite = $favoriteModel->toggle(Auth::id(), $recipeId);
 
+if ($isFavorite === null) {
+    echo json_encode(['success' => false, 'message' => 'Recipe not found.']);
+    exit;
+}
+
 // Return JSON response to client
 echo json_encode([
     'success' => true,

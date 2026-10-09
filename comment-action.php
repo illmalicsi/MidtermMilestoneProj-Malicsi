@@ -4,11 +4,13 @@
 require_once 'db.php';
 require_once 'includes/helpers.php';
 require_once 'classes/Auth.php';
+require_once 'classes/Recipe.php';
 require_once 'classes/Comment.php';
 
 // Enforce member access
 Auth::requireLogin();
 
+$recipeModel = new Recipe($pdo);
 $commentModel = new Comment($pdo);
 $userId = Auth::id();
 
@@ -18,7 +20,15 @@ $recipeId = !empty($_POST['recipe_id']) ? (int)$_POST['recipe_id'] : (!empty($_G
 // Create comment
 if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = trim($_POST['body'] ?? '');
-    if (!empty($body) && $recipeId > 0) {
+    $targetRecipe = $recipeModel->getById($recipeId);
+
+    if (!$targetRecipe) {
+        setFlash('error', 'Recipe not found.');
+        header('Location: index.php');
+        exit;
+    }
+
+    if (!empty($body)) {
         $commentModel->create($recipeId, $userId, $body);
         setFlash('success', 'Your comment has been posted!');
     } else {
@@ -29,6 +39,10 @@ if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $commentId = !empty($_GET['id']) ? (int)$_GET['id'] : 0;
     $comment = $commentModel->getById($commentId);
 
+    if ($comment) {
+        $recipeId = (int)$comment['recipe_id'];
+    }
+
     // Strictly allow only the author to delete their comment
     if ($comment && (int)$comment['user_id'] === $userId) {
         $commentModel->delete($commentId);
@@ -38,6 +52,10 @@ if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Redirect back to recipe view
-header('Location: recipe-view.php?id=' . $recipeId);
+// Redirect back to recipe view or home feed
+if ($recipeId > 0) {
+    header('Location: recipe-view.php?id=' . $recipeId);
+} else {
+    header('Location: index.php');
+}
 exit;

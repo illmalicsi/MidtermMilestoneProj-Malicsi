@@ -39,6 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
             svg.setAttribute('fill', isFav ? 'currentColor' : 'none');
           }
 
+          const span = btn.querySelector('span');
+          if (span) {
+            span.textContent = isFav ? 'Favorited' : 'Favorite';
+          }
+
           // If on favorites.php, optionally fade out and remove card if unfavorited
           if (window.location.pathname.includes('favorites.php') && !isFav) {
             const card = btn.closest('.recipe-card');

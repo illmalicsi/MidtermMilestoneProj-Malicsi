@@ -21,7 +21,14 @@ class Favorite {
      * Toggle favorite: add if not favorited, delete if already favorited
      * Returns true if newly favorited, false if removed
      */
-    public function toggle(int $userId, int $recipeId): bool {
+    public function toggle(int $userId, int $recipeId): ?bool {
+        // Verify that target recipe exists
+        $check = $this->pdo->prepare("SELECT id FROM recipes WHERE id = ?");
+        $check->execute([$recipeId]);
+        if (!$check->fetch()) {
+            return null;
+        }
+
         if ($this->isFavorite($userId, $recipeId)) {
             // Remove from favorites
             $stmt = $this->pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND recipe_id = ?");

@@ -40,14 +40,18 @@ class User {
             VALUES (:first_name, :last_name, :email, :password, NOW())
         ");
 
-        $success = $stmt->execute([
-            ':first_name' => trim($firstName),
-            ':last_name' => trim($lastName),
-            ':email' => trim($email),
-            ':password' => $hashedPassword
-        ]);
+        try {
+            $success = $stmt->execute([
+                ':first_name' => trim($firstName),
+                ':last_name' => trim($lastName),
+                ':email' => trim($email),
+                ':password' => $hashedPassword
+            ]);
 
-        return $success ? (int)$this->pdo->lastInsertId() : false;
+            return $success ? (int)$this->pdo->lastInsertId() : false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     /**
