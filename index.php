@@ -26,9 +26,46 @@ $selectedCategory = !empty($_GET['category']) ? (int)$_GET['category'] : null;
 // Fetch recipes ordered by latest first, filtered by search query and category
 $recipes = $recipeModel->getAll($searchQuery, $selectedCategory);
 
+// Retrieve session flash notifications
+$flashSuccess = getFlash('success');
+$flashError = getFlash('error');
+$flashInfo = getFlash('info');
+
 $pageTitle = 'Home Recipes';
 require_once 'includes/header.php';
 ?>
+
+<!-- Flash message alerts -->
+<?php if (!empty($flashSuccess)): ?>
+  <div class="alert alert-success">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span><?php echo e($flashSuccess); ?></span>
+  </div>
+<?php endif; ?>
+
+<?php if (!empty($flashError)): ?>
+  <div class="alert alert-danger">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+    <span><?php echo e($flashError); ?></span>
+  </div>
+<?php endif; ?>
+
+<?php if (!empty($flashInfo)): ?>
+  <div class="alert alert-info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+    <span><?php echo e($flashInfo); ?></span>
+  </div>
+<?php endif; ?>
 
 <!-- Intro Section -->
 <div class="hero">

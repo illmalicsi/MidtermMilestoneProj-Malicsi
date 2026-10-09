@@ -56,7 +56,7 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`id`),
   KEY `recipe_id` (`recipe_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `favorites` (
   UNIQUE KEY `unique_user_recipe` (`user_id`,`recipe_id`),
   KEY `user_id` (`user_id`),
   KEY `recipe_id` (`recipe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `ingredients` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `recipe_id` (`recipe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `ingredients` (
 
 LOCK TABLES `ingredients` WRITE;
 /*!40000 ALTER TABLE `ingredients` DISABLE KEYS */;
-INSERT INTO `ingredients` VALUES (4,2,'500g Pork belly, cut into cubes'),(5,2,'2 cups Coconut milk (gata)'),(6,2,'1 cup Coconut cream (kakang gata)'),(7,2,'5 pcs Siling labuyo (bird\'s eye chili), chopped'),(8,2,'3 pcs Siling haba (green chili), sliced'),(9,2,'4 cloves Garlic, minced'),(10,2,'1 pc Medium onion, chopped'),(11,2,'1 thumb Ginger, minced'),(12,2,'2 tbsp Bagoong alamang (shrimp paste)'),(13,2,'1 tbsp Cooking oil'),(14,2,'Salt and ground black pepper to taste');
+INSERT INTO `ingredients` VALUES (4,2,'500g Pork belly, cut into cubes'),(5,2,'2 cups Coconut milk (gata)'),(6,2,'1 cup Coconut cream (kakang gata)'),(7,2,'5 pcs Siling labuyo (bird\'s eye chili), chopped'),(8,2,'3 pcs Siling haba (green chili), sliced'),(9,2,'4 cloves Garlic, minced'),(10,2,'1 pc Medium onion, chopped'),(11,2,'1 thumb Ginger, minced'),(12,2,'2 tbsp Bagoong alamang (shrimp paste)'),(13,2,'1 tbsp Cooking oil'),(14,2,'Salt and ground black pepper to taste'),(19,4,'dd'),(20,4,'dd'),(21,4,'dd');
 /*!40000 ALTER TABLE `ingredients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +142,7 @@ CREATE TABLE `recipes` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +151,7 @@ CREATE TABLE `recipes` (
 
 LOCK TABLES `recipes` WRITE;
 /*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
-INSERT INTO `recipes` VALUES (2,1,2,'Bicol Express','Bicol Express is a creamy stew that combines spice and sweetness in a well-balanced manner. The dish makes use of ginger and local seasonings resulting in a flavorful combination of meat and sauce.','1. Heat cooking oil in a pan over medium heat. Sauté minced garlic, onion, and ginger until fragrant and softened.\n2. Add the cubed pork belly and cook until lightly browned on all sides.\n3. Stir in the bagoong alamang (shrimp paste) and cook for 2 minutes to blend the flavors.\n4. Pour in the 2 cups of coconut milk (gata) and bring to a simmer. Lower the heat, cover, and simmer for 25 to 30 minutes until the pork is tender.\n5. Add the chopped siling labuyo and sliced siling haba.\n6. Pour in the 1 cup of coconut cream (kakang gata). Simmer uncovered while stirring occasionally until the sauce thickens and oils start to render.\n7. Season with salt and black pepper to taste. Serve hot with warm steamed white rice!','2026-10-09 14:55:35',NULL);
+INSERT INTO `recipes` VALUES (2,1,2,'Bicol Express','Bicol Express is a creamy stew that combines spice and sweetness in a well-balanced manner. The dish makes use of ginger and local seasonings resulting in a flavorful combination of meat and sauce.','1. Heat cooking oil in a pan over medium heat. Sauté minced garlic, onion, and ginger until fragrant and softened.\n2. Add the cubed pork belly and cook until lightly browned on all sides.\n3. Stir in the bagoong alamang (shrimp paste) and cook for 2 minutes to blend the flavors.\n4. Pour in the 2 cups of coconut milk (gata) and bring to a simmer. Lower the heat, cover, and simmer for 25 to 30 minutes until the pork is tender.\n5. Add the chopped siling labuyo and sliced siling haba.\n6. Pour in the 1 cup of coconut cream (kakang gata). Simmer uncovered while stirring occasionally until the sauce thickens and oils start to render.\n7. Season with salt and black pepper to taste. Serve hot with warm steamed white rice!','2026-10-09 14:55:35',NULL),(4,1,1,'dddsd','dddd','dd','2026-10-09 15:25:04',NULL);
 /*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ivan Louie','Malicsi','illmalicsi@addu.edu.ph','$2y$10$QvxEoD3J7N1haDdyLAWi4enQhQy6MHcD80yIrxkI8jpJm0egL6kYu','2026-10-09 14:40:40');
+INSERT INTO `users` VALUES (1,'Ivan Louie','Malicsi','illmalicsi@addu.edu.ph','$2y$10$QvxEoD3J7N1haDdyLAWi4enQhQy6MHcD80yIrxkI8jpJm0egL6kYu','2026-10-09 14:40:40'),(2,'Juan','Dela Cruz','test cook1791530676@example.com','$2y$10$Eg6wOFGmcYZ8GYtX9xlxbOTCkngp8RhPtv5U5uW08aQyE93rCq82C','2026-10-09 15:24:36');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -193,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-09 15:23:54
+-- Dump completed on 2026-10-09 15:26:41
